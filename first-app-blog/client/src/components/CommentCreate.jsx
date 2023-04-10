@@ -17,7 +17,7 @@ const CommentCreate = ({postId}) => {
     <div>
         <form onSubmit={handleComment}>
             <div className="form-group">
-                <lable>New Comment</lable>
+                <h4>New Comment</h4>
                 <input type="text" className="form-control" value={content} onChange={(e)=>setContent(e.target.value)} />
             </div>
             <button className='btn btn-primary'>submit</button>

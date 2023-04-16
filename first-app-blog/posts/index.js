@@ -11,7 +11,11 @@ app.use(express.json());
 const posts = {};
 
 app.get("/posts", (req, res) => {
-  res.send(posts);
+  try {
+    res.send(posts);
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 app.post("/posts", async (req, res) => {
@@ -29,7 +33,6 @@ app.post("/posts", async (req, res) => {
       type: "PostCreated",
       data: { id, title },
     });
-
     res.status(201).send(posts[id]);
   } catch (error) {
     console.log(error);
@@ -37,11 +40,17 @@ app.post("/posts", async (req, res) => {
 });
 
 app.post("/events", (req, res) => {
+  try {
     console.log("Event Received :", req.body.type);
     res.send({msg:"post created"});
+  } catch (error) {
+    console.log(error)
+  }
   });
 
 
-app.listen(4000, () => {
-  console.log("listening on port 4000");
+app.listen(4000, (err) => {
+  err ?
+  console.log(err)
+  :console.log("listening on port 4000");
 });
